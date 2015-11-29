@@ -1,0 +1,20 @@
+﻿<Window x:Class="WinLibraryTool.WpfDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="{Binding DialogTitle}" MinWidth="474" SizeToContent="WidthAndHeight" ResizeMode="NoResize" ShowInTaskbar="False" WindowStartupLocation="CenterOwner">
+    <DockPanel>
+		<Grid DockPanel.Dock="Top">
+			<StackPanel Orientation="Horizontal">
+				<Image Name="iconImage" Stretch="Fill" Margin="15" Width="32" Height="32" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+				<TextBlock Text="{Binding Description}" FontSize="14" Margin="0,15,15,15" Foreground="RoyalBlue" VerticalAlignment="Center"></TextBlock>
+			</StackPanel>
+			<Rectangle Stroke="WhiteSmoke" Height="1" VerticalAlignment="Bottom" />
+		</Grid>
+		<Grid Background="WhiteSmoke" DockPanel.Dock="Bottom" >
+			<StackPanel x:Name="buttonPanel" Orientation="Horizontal" HorizontalAlignment="Right" Margin="7">
+				<Button Height="23" Width="70" Click="btnResponse_Click">OK</Button>
+			</StackPanel>
+		</Grid>
+		<Grid x:Name="UserContentArea" Margin="15"></Grid>
+	</DockPanel>
+</Window>

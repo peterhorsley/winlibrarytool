@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="WinLibraryTool.UserControls.LibraryPropertiesControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:converters="clr-namespace:WinLibraryTool.Converters"
+	xmlns:diagnostics="clr-namespace:System.Diagnostics;assembly=WindowsBase"
+	>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+		    <TextBlock VerticalAlignment="Center">
+			    Library name:
+		    </TextBlock>
+			<TextBox Margin="8,0,0,0" Width="160" Text="{Binding Path=Name, Mode=TwoWay}"></TextBox>
+        </StackPanel>
+		<StackPanel Orientation="Horizontal">
+			<TextBlock VerticalAlignment="Center">
+			    Library icon:
+			</TextBlock>
+			<Image MinWidth="32" MinHeight="32" Margin="15" Source="{Binding Path=IconReference, Converter={converters:IconReferenceToBitmap}}"></Image>
+			<Button Command="{Binding ChooseIconCommand}" CommandParameter="{Binding UserInterface}" MinWidth="90" Height="23">Choose icon...</Button>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal">
+			<TextBlock VerticalAlignment="Center">
+			    Library type:
+			</TextBlock>
+			<ComboBox Margin="15,0,0,5" MinWidth="137" ItemsSource="{Binding LibraryTypes}" DisplayMemberPath="Value" SelectedValuePath="Key" SelectedValue="{Binding LibraryType}"></ComboBox>
+		</StackPanel>
+		<TextBlock Margin="0,0,0,0" VerticalAlignment="Center">
+			    Library folders:
+		</TextBlock>
+		<ListBox Margin="0,10,0,10" Height="100" Name="folderListBox" SelectionChanged="folderListBox_SelectionChanged">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<StackPanel Orientation="Horizontal" MaxWidth="{Binding ElementName=folderListBox, Path=ActualWidth}">
+						<Image Source="../../Images/folder-tick.png" Visibility="{Binding Path=IsSaveLocation, Converter={converters:BoolToVisibility}}" />
+						<Image Source="../../Images/folder.png" Margin="2,0,5,0"/>
+						<TextBlock VerticalAlignment="Center" Text="{Binding FolderName}" TextWrapping="NoWrap" />
+					</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+			<Button Command="{Binding SetSaveCommand}" Margin="0,0,10,0" MinWidth="110">_Set save location</Button>
+			<Button Command="{Binding IncludeFolderCommand}" CommandParameter="{Binding UserInterface}" Margin="0,0,10,0" MinWidth="110">_Include folder(s)...</Button>
+			<Button Command="{Binding RemoveCommand}" MinWidth="70">_Remove</Button>
+		</StackPanel>
+	</StackPanel>
+</UserControl>
